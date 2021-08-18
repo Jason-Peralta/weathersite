@@ -1,11 +1,12 @@
 import React from 'react';
-import {Button, Pane, SelectMenu, Text} from "evergreen-ui";
+import {Button, majorScale, Pane, SelectMenu, Text} from "evergreen-ui";
 
 
 export default function StateFilter() {
     const [selected, setSelected] = React.useState(null)
     const [filter, setFilter] = React.useState('')
     return (
+        <Pane display="flex" alginItems="center" marginX={majorScale(3)}>
             <SelectMenu
                 title="Select State"
                 onFilterChange={(filter) => setFilter(filter)}
@@ -15,5 +16,6 @@ export default function StateFilter() {
             >
                 <Button>{selected || 'Select State...'}</Button>
             </SelectMenu>
+        </Pane>
     )
 }
