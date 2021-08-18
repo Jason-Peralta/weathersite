@@ -1,25 +1,22 @@
-import logo from './logo.svg';
+import {Button, Pane, Text, majorScale, Card, TextInput} from 'evergreen-ui'
 import './App.css';
+import StateFilter from "./components/statefilter";
+import WeatherFilter from "./components/weatherfilter";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <Pane>
+            <Pane display="flex" alginItems="center" marginX={majorScale(3)}>
+                <StateFilter/>
+            </Pane>,
+                <WeatherFilter/>
+        </Pane>
+
     </div>
+
   );
 }
+
 
 export default App;
