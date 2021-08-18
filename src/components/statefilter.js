@@ -13,7 +13,7 @@ export default function StateFilter() {
                 selected={selected}
                 onSelect={(item) => setSelected(item.value)}
             >
-                <Button>{selected || 'Select name...'}</Button>
+                <Button>{selected || 'Select State...'}</Button>
             </SelectMenu>
     )
 }
