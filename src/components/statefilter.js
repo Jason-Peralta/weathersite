@@ -15,7 +15,9 @@ export default function StateFilter(props) {
                 onSelect={
                     (item)=>{
                         setSelected(item.value)
-                        props.handler(item.value)
+                        let temp = props.answers
+                        temp.state= item.value
+                        props.handler(temp)
                     }
                 }
             >
