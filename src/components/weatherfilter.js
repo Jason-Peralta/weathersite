@@ -5,6 +5,7 @@ import {Button, majorScale, Pane, SelectMenu, Strong, TextInput} from "evergreen
 
 export default function WeatherFilter(props) {
     const [selected, setSelected] = React.useState(null)
+    const [value, setValue] = React.useState('')
     return (
         <Pane>
         <Pane display="flex" alginItems="center" marginX={majorScale(3)}>
@@ -20,13 +21,25 @@ export default function WeatherFilter(props) {
             onSelect={
                 (item)=>{
                     setSelected(item.value)
-                    props.handler(item.value)
+                    let temp = props.answers
+                    temp.minTemp.minTempRelationalModifier = item.value
+                    props.handler(temp)
                 }
             }
         >
             <Button>{selected || 'Select Relational Operator...'}</Button>
         </SelectMenu>
-            <TextInput  width="20%" placeholder="Maximum Temperature" />
+                <TextInput
+                    placeholder="Enter Number Of Minimum Temperature"
+                    onChange={
+                        (e)=>{
+                            let temp = props.answers
+                            temp.minTemp.value = e.target.value
+                            props.handler(temp)
+                        }
+                    }
+                />
+
         </Pane>
         </Pane>
     )

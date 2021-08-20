@@ -7,7 +7,13 @@ import WeatherFilter from "./components/weatherfilter";
 
 
 function App() {
-    const[answers, setAnswers] = React.useState({})
+    const[answers, setAnswers] = React.useState({
+        state: "",
+        minTemp: {
+            value: null,
+            minTempRelationalModifier: "",
+            }
+});
     return (
         <Pane
             background="tint2"
@@ -20,8 +26,8 @@ function App() {
 
             <Heading is="h1">Weather App!</Heading>
 
-                <StateFilter handler={setAnswers}/>
-                <WeatherFilter handler={setAnswers}/>
+                <StateFilter handler={setAnswers} answers={answers}/>
+                <WeatherFilter handler={setAnswers} answers={answers}/>
 
             <Button onClick={()=>{console.log(answers)}}/>
         </Pane>
