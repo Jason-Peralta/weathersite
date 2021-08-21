@@ -2,17 +2,50 @@ import {Button, Pane, Heading} from 'evergreen-ui'
 import React from "react";
 import './App.css';
 import StateFilter from "./components/statefilter";
-import WeatherFilter from "./components/weatherfilter";
+import ActualMeanFilter from "./components/actualmeanfilter";
+import ActualMinFilter from "./components/actualminfilter";
+import ActualMaxFilter from "./components/actualmaxfilter";
+import AverageMinFilter from "./components/averageminfilter";
+import AverageMaxFilter from "./components/averagemaxfilter";
 //NOT FINAL
 
-
+//date,
+// actual_mean_temp,
+// actual_min_temp,
+// actual_max_temp,
+// average_min_temp,
+// average_max_temp,
+// record_min_temp,
+// record_max_temp,
+// record_min_temp_year,
+// record_max_temp_year,
+// actual_precipitation,
+// average_precipitation,
+// record_precipitation
 function App() {
     const[answers, setAnswers] = React.useState({
         state: "",
-        minTemp: {
+        actualMeanTemp: {
             value: null,
-            minTempRelationalModifier: "",
-            }
+           RelationalModifier: "",
+            },
+        actualMinTemp: {
+            value: null,
+            RelationalModifier: "",
+        },
+        actualMaxTemp: {
+            value: null,
+            RelationalModifier: "",
+        },
+        averageMinTemp: {
+            value: null,
+            RelationalModifier: "",
+        },
+        averageMaxTemp: {
+            value: null,
+            RelationalModifier: "",
+        },
+
 });
     return (
         <Pane
@@ -27,7 +60,12 @@ function App() {
             <Heading is="h1">Weather App!</Heading>
 
                 <StateFilter handler={setAnswers} answers={answers}/>
-                <WeatherFilter handler={setAnswers} answers={answers}/>
+                <ActualMeanFilter handler={setAnswers} answers={answers}/>
+                <ActualMinFilter handler={setAnswers} answers={answers}/>
+                <ActualMaxFilter handler={setAnswers} answers={answers}/>
+                <AverageMinFilter handler={setAnswers} answers={answers}/>
+                <AverageMaxFilter handler={setAnswers} answers={answers}/>
+
 
             <Button onClick={()=>{console.log(answers)}}/>
         </Pane>

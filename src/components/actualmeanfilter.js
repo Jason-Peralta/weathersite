@@ -2,16 +2,16 @@ import React from 'react';
 import {Button, majorScale, Pane, SelectMenu, Strong, TextInput} from "evergreen-ui";
 
 
-
-export default function WeatherFilter(props) {
+// actual_mean_temp
+export default function ActualMeanFilter(props) {
     const [selected, setSelected] = React.useState(null)
     const [value, setValue] = React.useState('')
     return (
         <Pane>
-        <Pane display="flex" alginItems="center" marginX={majorScale(3)}>
-            <Strong> Weather Variable </Strong>
+        <Pane display="flex" alignItems="center" marginX={majorScale(3)}>
+            <Strong> Actual Mean Temp </Strong>
         </Pane>
-            <Pane display="flex" alginItems="center" padding={8} marginX={majorScale(3)}>
+            <Pane display="flex" alignItems="center" padding={8} marginX={majorScale(3)}>
         <SelectMenu
             title="Select name"
             options={['Greater Than', 'Less Than', 'Equal To'].map((label) => ({ label, value: label }))}
@@ -22,7 +22,7 @@ export default function WeatherFilter(props) {
                 (item)=>{
                     setSelected(item.value)
                     let temp = props.answers
-                    temp.minTemp.minTempRelationalModifier = item.value
+                    temp.actualMeanTemp.RelationalModifier = item.value
                     props.handler(temp)
                 }
             }
@@ -30,11 +30,11 @@ export default function WeatherFilter(props) {
             <Button>{selected || 'Select Relational Operator...'}</Button>
         </SelectMenu>
                 <TextInput
-                    placeholder="Enter Number Of Minimum Temperature"
+                    placeholder="Enter Number Of Actual Mean Temp"
                     onChange={
                         (e)=>{
                             let temp = props.answers
-                            temp.minTemp.value = e.target.value
+                            temp.actualMeanTemp.value = e.target.value
                             props.handler(temp)
                         }
                     }
