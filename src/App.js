@@ -7,21 +7,9 @@ import ActualMinFilter from "./components/actualminfilter";
 import ActualMaxFilter from "./components/actualmaxfilter";
 import AverageMinFilter from "./components/averageminfilter";
 import AverageMaxFilter from "./components/averagemaxfilter";
-//NOT FINAL
 
-//date,
-// actual_mean_temp,
-// actual_min_temp,
-// actual_max_temp,
-// average_min_temp,
-// average_max_temp,
-// record_min_temp,
-// record_max_temp,
-// record_min_temp_year,
-// record_max_temp_year,
-// actual_precipitation,
-// average_precipitation,
-// record_precipitation
+//staging not final
+
 function App() {
     const[answers, setAnswers] = React.useState({
         state: "",
