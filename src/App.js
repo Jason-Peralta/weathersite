@@ -3,9 +3,7 @@ import React from "react";
 import './App.css';
 import StateFilter from "./components/statefilter";
 import WeatherFilter from "./components/weatherfilter";
-//NOT FINAL
-
-
+//Staging Not Final
 function App() {
     const[answers, setAnswers] = React.useState({
         state: "",
