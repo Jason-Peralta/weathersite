@@ -2,11 +2,8 @@ import {Button, Pane, Heading} from 'evergreen-ui'
 import React from "react";
 import './App.css';
 import StateFilter from "./components/statefilter";
-import ActualMeanFilter from "./components/actualmeanfilter";
-import ActualMinFilter from "./components/actualminfilter";
-import ActualMaxFilter from "./components/actualmaxfilter";
-import AverageMinFilter from "./components/averageminfilter";
-import AverageMaxFilter from "./components/averagemaxfilter";
+import WeatherFilter from "./components/weatherfilter";
+
 //NOT FINAL
 
 //date,
@@ -45,6 +42,26 @@ function App() {
             value: null,
             RelationalModifier: "",
         },
+        recordMinTemp: {
+            value: null,
+            RelationalModifier: "",
+        },
+        recordMaxTemp: {
+            value: null,
+            RelationalModifier: "",
+        },
+        actualPrecipitation: {
+            value: null,
+            RelationalModifier: "",
+        },
+        averagePrecipitation: {
+            value: null,
+            RelationalModifier: "",
+        },
+        recordPrecipitation: {
+            value: null,
+            RelationalModifier: "",
+        },
 
 });
     return (
@@ -59,12 +76,18 @@ function App() {
 
             <Heading is="h1">Weather App!</Heading>
 
-                <StateFilter handler={setAnswers} answers={answers}/>
-                <ActualMeanFilter handler={setAnswers} answers={answers}/>
-                <ActualMinFilter handler={setAnswers} answers={answers}/>
-                <ActualMaxFilter handler={setAnswers} answers={answers}/>
-                <AverageMinFilter handler={setAnswers} answers={answers}/>
-                <AverageMaxFilter handler={setAnswers} answers={answers}/>
+                <StateFilter handler={setAnswers} answers={answers} />
+                <WeatherFilter handler={setAnswers} answers={answers} name="actualMeanTemp" />
+                <WeatherFilter handler={setAnswers} answers={answers} name="actualMinTemp" />
+                <WeatherFilter handler={setAnswers} answers={answers} name="actualMaxTemp" />
+                <WeatherFilter handler={setAnswers} answers={answers} name="averageMinTemp" />
+                <WeatherFilter handler={setAnswers} answers={answers} name="averageMaxTemp" />
+
+                <WeatherFilter handler={setAnswers} answers={answers} name="recordMinTemp" />
+                <WeatherFilter handler={setAnswers} answers={answers} name="recordMaxTemp" />
+                <WeatherFilter handler={setAnswers} answers={answers} name="actualPrecipitation" />
+                <WeatherFilter handler={setAnswers} answers={answers} name="averagePrecipitation" />
+                <WeatherFilter handler={setAnswers} answers={answers} name="recordPrecipitation" />
 
 
             <Button onClick={()=>{console.log(answers)}}/>

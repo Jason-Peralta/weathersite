@@ -3,13 +3,13 @@ import {Button, majorScale, Pane, SelectMenu, Strong, TextInput} from "evergreen
 
 
 // actual_mean_temp
-export default function AverageMaxFilter(props) {
+export default function WeatherFilter(props) {
     const [selected, setSelected] = React.useState(null)
     const [value, setValue] = React.useState('')
     return (
         <Pane>
             <Pane display="flex" alignItems="center" marginX={majorScale(3)}>
-                <Strong> Average Max Temp </Strong>
+                <Strong>{props.name} </Strong>
             </Pane>
             <Pane display="flex" alignItems="center" padding={8} marginX={majorScale(3)}>
                 <SelectMenu
@@ -21,8 +21,11 @@ export default function AverageMaxFilter(props) {
                     onSelect={
                         (item)=>{
                             setSelected(item.value)
+
                             let temp = props.answers
-                            temp.averageMaxTemp.RelationalModifier = item.value
+                            let tempName = props.name
+
+                            temp[tempName].RelationalModifier = item.value
                             props.handler(temp)
                         }
                     }
@@ -30,11 +33,12 @@ export default function AverageMaxFilter(props) {
                     <Button>{selected || 'Select Relational Operator...'}</Button>
                 </SelectMenu>
                 <TextInput
-                    placeholder="Enter Number Of Average Max Temp"
+                    placeholder="enter value"
                     onChange={
                         (e)=>{
                             let temp = props.answers
-                            temp.averageMaxTemp.value = e.target.value
+                            let tempName = props.name
+                            temp[tempName].value = e.target.value
                             props.handler(temp)
                         }
                     }
