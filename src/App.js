@@ -3,6 +3,7 @@ import React from "react";
 import './App.css';
 import StateFilter from "./components/statefilter";
 import WeatherFilter from "./components/weatherfilter";
+import ApiButton from "./components/apibutton";
 
 //NOT FINAL
 
@@ -82,7 +83,6 @@ function App() {
                 <WeatherFilter handler={setAnswers} answers={answers} name="actualMaxTemp" />
                 <WeatherFilter handler={setAnswers} answers={answers} name="averageMinTemp" />
                 <WeatherFilter handler={setAnswers} answers={answers} name="averageMaxTemp" />
-
                 <WeatherFilter handler={setAnswers} answers={answers} name="recordMinTemp" />
                 <WeatherFilter handler={setAnswers} answers={answers} name="recordMaxTemp" />
                 <WeatherFilter handler={setAnswers} answers={answers} name="actualPrecipitation" />
@@ -90,7 +90,7 @@ function App() {
                 <WeatherFilter handler={setAnswers} answers={answers} name="recordPrecipitation" />
 
 
-            <Button onClick={()=>{console.log(answers)}}/>
+            <ApiButton answers={answers} />
         </Pane>
     );
 }
