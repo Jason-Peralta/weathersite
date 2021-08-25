@@ -27,7 +27,8 @@ export default function ApiButton(props) {
 
     return (
 
-        <Button onClick={()=>{fetchWeather()}}> {Weather} </Button>
+      //  <Button onClick={()=>{fetchWeather()}}> {Weather} </Button>
+        <Button onClick={()=>{console.log(props.answers)}}/>
     )
     }
 }

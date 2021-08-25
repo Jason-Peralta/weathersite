@@ -23,46 +23,49 @@ import ApiButton from "./components/apibutton";
 function App() {
     const[answers, setAnswers] = React.useState({
         state: "",
-        actualMeanTemp: {
-            value: null,
-           RelationalModifier: "",
+        actual: {
+            max: {
+                value: null,
+                RelationalModifier: "",
             },
-        actualMinTemp: {
-            value: null,
-            RelationalModifier: "",
+            min: {
+                value: null,
+                RelationalModifier: "",
+            },
+            mean: {
+                value: null,
+                RelationalModifier: "",
+            },
+            precipitation: {
+                value: null
+            }
         },
-        actualMaxTemp: {
-            value: null,
-            RelationalModifier: "",
+        average: {
+            max: {
+                value: null,
+                RelationalModifier: "",
+            },
+            min: {
+                value: null,
+                RelationalModifier: "",
+            },
+            precipitation: {
+                value: null
+            }
         },
-        averageMinTemp: {
-            value: null,
-            RelationalModifier: "",
-        },
-        averageMaxTemp: {
-            value: null,
-            RelationalModifier: "",
-        },
-        recordMinTemp: {
-            value: null,
-            RelationalModifier: "",
-        },
-        recordMaxTemp: {
-            value: null,
-            RelationalModifier: "",
-        },
-        actualPrecipitation: {
-            value: null,
-            RelationalModifier: "",
-        },
-        averagePrecipitation: {
-            value: null,
-            RelationalModifier: "",
-        },
-        recordPrecipitation: {
-            value: null,
-            RelationalModifier: "",
-        },
+        record: {
+            max: {
+                value: null,
+                RelationalModifier: "",
+            },
+            min: {
+                value: null,
+                RelationalModifier: "",
+            },
+            precipitation: {
+                value: null
+            }
+        }
 
 });
     return (
@@ -78,16 +81,16 @@ function App() {
             <Heading is="h1">Weather App!</Heading>
 
                 <StateFilter handler={setAnswers} answers={answers} />
-                <WeatherFilter handler={setAnswers} answers={answers} name="actualMeanTemp" />
-                <WeatherFilter handler={setAnswers} answers={answers} name="actualMinTemp" />
-                <WeatherFilter handler={setAnswers} answers={answers} name="actualMaxTemp" />
-                <WeatherFilter handler={setAnswers} answers={answers} name="averageMinTemp" />
-                <WeatherFilter handler={setAnswers} answers={answers} name="averageMaxTemp" />
-                <WeatherFilter handler={setAnswers} answers={answers} name="recordMinTemp" />
-                <WeatherFilter handler={setAnswers} answers={answers} name="recordMaxTemp" />
-                <WeatherFilter handler={setAnswers} answers={answers} name="actualPrecipitation" />
-                <WeatherFilter handler={setAnswers} answers={answers} name="averagePrecipitation" />
-                <WeatherFilter handler={setAnswers} answers={answers} name="recordPrecipitation" />
+                <WeatherFilter handler={setAnswers} answers={answers} name="actual" name2="mean" />
+                <WeatherFilter handler={setAnswers} answers={answers} name="actual" name2="min" />
+                <WeatherFilter handler={setAnswers} answers={answers} name="actual" name2="max" />
+                <WeatherFilter handler={setAnswers} answers={answers} name="average" name2="min" />
+                <WeatherFilter handler={setAnswers} answers={answers} name="average" name2="max" />
+                <WeatherFilter handler={setAnswers} answers={answers} name="record" name2="min" />
+                <WeatherFilter handler={setAnswers} answers={answers} name="record" name2="max" />
+                <WeatherFilter handler={setAnswers} answers={answers} name="actual" name2="precipitation"/>
+                <WeatherFilter handler={setAnswers} answers={answers} name="average" name2="precipitation"/>
+                <WeatherFilter handler={setAnswers} answers={answers} name="record" name2="precipitation"/>
 
 
             <ApiButton answers={answers} />
