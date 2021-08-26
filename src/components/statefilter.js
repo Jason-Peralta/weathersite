@@ -6,7 +6,7 @@ export default function StateFilter(props) {
     const [selected, setSelected] = React.useState(null)
     const [filter, setFilter] = React.useState('')
     return (
-        <Pane display="flex" alginItems="center" padding={8} marginX={majorScale(3)}>
+        <Pane display="flex" alignItems="center" padding={8} marginX={majorScale(3)}>
             <SelectMenu
                 title="Select State"
                 onFilterChange={(filter) => setFilter(filter)}
