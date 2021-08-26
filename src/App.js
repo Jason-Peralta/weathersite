@@ -68,7 +68,28 @@ function App() {
         }
 
 });
+
+    const WeatherNames = [
+        {name: 'actual', mod: 'max'},
+        {name: 'actual', mod: 'min'},
+        {name: 'actual', mod: 'mean'},
+        {name: 'average', mod: 'max'},
+        {name: 'average', mod: 'min'},
+        {name: 'record', mod: 'max'},
+        {name: 'record', mod: 'min'},
+        {name: 'actual', mod: 'precipitation'},
+        {name: 'average', mod: 'precipitation'},
+        {name: 'record', mod: 'precipitation'},
+    ];
+
+    const WeatherRender = ({WeatherNames}) => (
+        WeatherNames.map(weather => (
+            <WeatherFilter handler={setAnswers} answers={answers} name={weather.name} name2={weather.mod} />
+            )
+        )
+    );
     return (
+
         <Pane
             background="tint2"
             display="flex"
@@ -81,16 +102,8 @@ function App() {
             <Heading is="h1">Weather App!</Heading>
 
                 <StateFilter handler={setAnswers} answers={answers} />
-                <WeatherFilter handler={setAnswers} answers={answers} name="actual" name2="mean" />
-                <WeatherFilter handler={setAnswers} answers={answers} name="actual" name2="min" />
-                <WeatherFilter handler={setAnswers} answers={answers} name="actual" name2="max" />
-                <WeatherFilter handler={setAnswers} answers={answers} name="average" name2="min" />
-                <WeatherFilter handler={setAnswers} answers={answers} name="average" name2="max" />
-                <WeatherFilter handler={setAnswers} answers={answers} name="record" name2="min" />
-                <WeatherFilter handler={setAnswers} answers={answers} name="record" name2="max" />
-                <WeatherFilter handler={setAnswers} answers={answers} name="actual" name2="precipitation"/>
-                <WeatherFilter handler={setAnswers} answers={answers} name="average" name2="precipitation"/>
-                <WeatherFilter handler={setAnswers} answers={answers} name="record" name2="precipitation"/>
+
+                <WeatherRender WeatherNames={WeatherNames} />
 
 
             <ApiButton answers={answers} />
