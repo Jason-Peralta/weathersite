@@ -3,10 +3,18 @@ import {Button} from "evergreen-ui";
 
 export default function ApiButton(props) {
     const [Weather, setWeather] = React.useState(null)
-
+    //example http://localhost:3000/weather/KPHX/?actual_max_temp=101
     const fetchWeather = async () => {
+        let stateTemp = props.answers.state
+        let temp = props.answers.actual.max.value
+        let apiURL = "http://localhost:3000/weather/KPHX/?" + stateTemp
+        if (temp){
+            apiURL = apiURL + "actual_max_temp=" + temp
+        }
+
+
         setWeather(
-            await fetch("http://localhost:3000/weather/KPHX/?actual_max_temp[eq]=104&actual_mean_temp[gt]=94")
+            await fetch(apiURL)
                 .then(response => response.json())
                 .then(json => json.KPHX)
         )
@@ -27,8 +35,8 @@ export default function ApiButton(props) {
 
     return (
 
-      //  <Button onClick={()=>{fetchWeather()}}> {Weather} </Button>
-        <Button onClick={()=>{console.log(props.answers)}}/>
+        <Button onClick={()=>{fetchWeather()}}> {Weather} </Button>
+      //  <Button onClick={()=>{console.log(props.answers)}}/>
     )
     }
 }
