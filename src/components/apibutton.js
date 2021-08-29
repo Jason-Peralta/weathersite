@@ -4,7 +4,7 @@ import {Button} from "evergreen-ui";
 export default function ApiButton(props) {
     const [Weather, setWeather] = React.useState(null)
     //example http://localhost:3000/weather/KPHX/?actual_max_temp=101
-
+    //change method of acquiring the queryString, since this isnt ideal
 
     let queryString = Object.keys(props.answers).map(key =>
         Object.keys(props.answers[key]).map(key2 =>
