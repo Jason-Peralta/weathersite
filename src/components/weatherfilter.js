@@ -14,7 +14,7 @@ export default function WeatherFilter(props) {
             <Pane display="flex" alignItems="center" padding={8} marginX={majorScale(3)}>
                 <SelectMenu
                     title="Select name"
-                    options={['Greater Than', 'Less Than', 'Equal To'].map((label) => ({ label, value: label }))}
+                    options={['Greater Than', 'Less Than'].map((label) => ({ label, value: label }))}
                     selected={selected}
                     hasFilter={false}
                     hasTitle={false}
