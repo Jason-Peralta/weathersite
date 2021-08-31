@@ -2,35 +2,45 @@ import React, {useEffect} from 'react';
 import {Button} from "evergreen-ui";
 
 export default function ApiButton(props) {
-
     let apiURL = "http://localhost:3000/weather/"
     const [Weather, setWeather] = React.useState(null)
     //example http://localhost:3000/weather/KPHX/?actual_max_temp=101
 
+    let stateURL = props.answers.state
 
-
-    const stateFormatter = (stateURL) => {
-        return (stateURL === 'Charlotte')
-            ? "KCLT"
-            :(stateURL === 'Los Angeles')
-                ? "KCQT"
-                :(stateURL === 'Houston')
-                    ? "KHOU"
-                    :(stateURL === 'Indianapolis')
-                        ? "KIND"
-                        :(stateURL === 'Jacksonville')
-                            ? "KJAX"
-                            :(stateURL === 'Chicago')
-                                ? "KMDW"
-                                :(stateURL === 'New York City')
-                                    ? "KNYC"
-                                    :(stateURL === 'Philadelphia')
-                                        ? "KPHL"
-                                        :(stateURL === 'Phoenix')
-                                            ? "KPHX"
-                                            :(stateURL === 'Seattle')
-                                                ? "KSEA"
-                                                : ""
+    function stateFormatter(stateURL) {
+        switch(stateURL) {
+            case 'Charlotte':
+                apiURL = apiURL + "KCLT/"
+                break;
+            case 'Los Angeles':
+                apiURL = apiURL + "KCQT/"
+                break;
+            case 'Houston':
+                apiURL = apiURL + "KHOU/"
+                break;
+            case 'Indianapolis':
+                apiURL = apiURL + "KIND/"
+                break;
+            case 'Jacksonville':
+                apiURL = apiURL + "KJAX/"
+                break;
+            case 'Chicago':
+                apiURL = apiURL + "KMDW/"
+                break;
+            case 'New York City':
+                apiURL = apiURL + "KNYC/"
+                break;
+            case 'Philadelphia':
+                apiURL = apiURL + "KPHL/"
+                break;
+            case 'Phoenix':
+                apiURL = apiURL +"KPHX/"
+                break;
+            case 'Seattle':
+                apiURL = apiURL + "KSEA/"
+                break;
+        }
     }
 
 
@@ -108,11 +118,10 @@ export default function ApiButton(props) {
     } else{
 
     return (
-
         //<Button onClick={()=>{fetchWeather()}}> {Weather} </Button>
        // <Button onClick={()=> {console.log(queryString)}}/>
         <Button onClick={()=>{
-            apiURL = apiURL + stateFormatter(props.answers.state) + '/'
+            stateFormatter(props.answers.state)
             console.log(props.answers)
             console.log(apiURL + transformedStateToQuery(getTransformedState(props.answers)))
         }}/>
