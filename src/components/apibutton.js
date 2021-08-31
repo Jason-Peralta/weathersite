@@ -2,21 +2,60 @@ import React, {useEffect} from 'react';
 import {Button} from "evergreen-ui";
 
 export default function ApiButton(props) {
+
+    let apiURL = "http://localhost:3000/weather/KPHX/"
     const [Weather, setWeather] = React.useState(null)
     //example http://localhost:3000/weather/KPHX/?actual_max_temp=101
-    //change method of acquiring the queryString, since this isnt ideal
 
-    let queryString = Object.keys(props.answers).map(key =>
-        Object.keys(props.answers[key]).map(key2 =>
-            key + '_' + key2 + '_temp' + '[' + props.answers[key][key2].RelationalModifier + ']=' + props.answers[key][key2].value).join('&')).join('&');
 
-        queryString = queryString.replaceAll('Greater Than', 'gt').replaceAll('Less Than', 'lt').replaceAll('state_0_temp[undefined]=undefined&state_1_temp[undefined]=undefined&state_2_temp[undefined]=undefined&state_3_temp[undefined]=undefined&state_4_temp[undefined]=undefined&state_5_temp[undefined]=undefined&state_6_temp[undefined]=undefined&state_7_temp[undefined]=undefined','')
+
+    const modFormatter = (mod) => {
+        return (mod === 'Greater Than')
+            ? "gt"
+            : (mod === 'Less Than')
+                ? "lt"
+                : (mod === 'Equal To')
+                    ? "et"
+                    : ""
+    }
+
+    const getTransformedState = () => {
+        let transformedStateObj = [];
+
+        Object.keys(props.answers).map(key => {
+            if (key === "state") {
+                return {key: props.answers[key]};
+            }
+            return Object.keys(props.answers[key]).map(subKey => {
+                return {
+                    name: key + "_" + subKey,
+                    temp: props.answers[key][subKey].value,
+                    mod: modFormatter(props.answers[key][subKey].RelationalModifier)
+                }
+            })
+        }).forEach(x => {
+            if (!Array.isArray(x)) return;
+            x.forEach(y => {
+                if (y.temp !== null) transformedStateObj.push(y)
+            })
+        });
+
+        console.log(transformedStateObj)
+
+        return transformedStateObj;
+    }
+
+    const transformedStateToQuery = (arr) => {
+        return "?" + arr.map(x => {
+            return x.name + "_temp" + ((x.mod === '') ? "" : "[" + x.mod + "]") + "=" + x.temp;
+        }).join("&")
+    }
+
 
     const fetchWeather = async () => {
 
         let stateTemp = props.answers.state
         let temp = props.answers.actual.max.value
-        let apiURL = "http://localhost:3000/weather/KPHX/?" + stateTemp
         if (temp){
             apiURL = apiURL + "actual_max_temp=" + temp
         }
@@ -50,7 +89,7 @@ export default function ApiButton(props) {
         <Button onClick={()=>{
 
             console.log(props.answers)
-            console.log(queryString)
+            console.log(apiURL + transformedStateToQuery(getTransformedState(props.answers)))
         }}/>
     )
     }
