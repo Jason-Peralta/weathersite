@@ -3,10 +3,35 @@ import {Button} from "evergreen-ui";
 
 export default function ApiButton(props) {
 
-    let apiURL = "http://localhost:3000/weather/KPHX/"
+    let apiURL = "http://localhost:3000/weather/"
     const [Weather, setWeather] = React.useState(null)
     //example http://localhost:3000/weather/KPHX/?actual_max_temp=101
 
+
+
+    const stateFormatter = (stateURL) => {
+        return (stateURL === 'Charlotte')
+            ? "KCLT"
+            :(stateURL === 'Los Angeles')
+                ? "KCQT"
+                :(stateURL === 'Houston')
+                    ? "KHOU"
+                    :(stateURL === 'Indianapolis')
+                        ? "KIND"
+                        :(stateURL === 'Jacksonville')
+                            ? "KJAX"
+                            :(stateURL === 'Chicago')
+                                ? "KMDW"
+                                :(stateURL === 'New York City')
+                                    ? "KNYC"
+                                    :(stateURL === 'Philadelphia')
+                                        ? "KPHL"
+                                        :(stateURL === 'Phoenix')
+                                            ? "KPHX"
+                                            :(stateURL === 'Seattle')
+                                                ? "KSEA"
+                                                : ""
+    }
 
 
     const modFormatter = (mod) => {
@@ -87,7 +112,7 @@ export default function ApiButton(props) {
         //<Button onClick={()=>{fetchWeather()}}> {Weather} </Button>
        // <Button onClick={()=> {console.log(queryString)}}/>
         <Button onClick={()=>{
-
+            apiURL = apiURL + stateFormatter(props.answers.state) + '/'
             console.log(props.answers)
             console.log(apiURL + transformedStateToQuery(getTransformedState(props.answers)))
         }}/>
