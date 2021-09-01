@@ -6,6 +6,7 @@ import {Button, majorScale, Pane, SelectMenu, Strong, TextInput} from "evergreen
 export default function WeatherFilter(props) {
     const [selected, setSelected] = React.useState(null)
     const [value, setValue] = React.useState('')
+    const options = ['Greater Than', 'Greater Than Equal To' , 'Less Than', 'Less Than Equal To', 'Equal To']
     return (
         <Pane>
             <Pane display="flex" alignItems="center" marginX={majorScale(3)}>
@@ -14,7 +15,7 @@ export default function WeatherFilter(props) {
             <Pane display="flex" alignItems="center" padding={8} marginX={majorScale(3)}>
                 <SelectMenu
                     title="Select name"
-                    options={['Greater Than', 'Less Than'].map((label) => ({ label, value: label }))}
+                    options={options.map((label) => ({ label, value: label }))}
                     selected={selected}
                     hasFilter={false}
                     hasTitle={false}
