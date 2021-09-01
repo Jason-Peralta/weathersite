@@ -11,34 +11,34 @@ export default function ApiButton(props) {
     function stateFormatter(stateURL) {
         switch(stateURL) {
             case 'Charlotte':
-                apiURL = apiURL + "KCLT/"
+                apiURL = apiURL + "KCLT/?"
                 break;
             case 'Los Angeles':
-                apiURL = apiURL + "KCQT/"
+                apiURL = apiURL + "KCQT/?"
                 break;
             case 'Houston':
-                apiURL = apiURL + "KHOU/"
+                apiURL = apiURL + "KHOU/?"
                 break;
             case 'Indianapolis':
-                apiURL = apiURL + "KIND/"
+                apiURL = apiURL + "KIND/?"
                 break;
             case 'Jacksonville':
-                apiURL = apiURL + "KJAX/"
+                apiURL = apiURL + "KJAX/?"
                 break;
             case 'Chicago':
-                apiURL = apiURL + "KMDW/"
+                apiURL = apiURL + "KMDW/?"
                 break;
             case 'New York City':
-                apiURL = apiURL + "KNYC/"
+                apiURL = apiURL + "KNYC/?"
                 break;
             case 'Philadelphia':
-                apiURL = apiURL + "KPHL/"
+                apiURL = apiURL + "KPHL/?"
                 break;
             case 'Phoenix':
-                apiURL = apiURL +"KPHX/"
+                apiURL = apiURL +"KPHX/?"
                 break;
             case 'Seattle':
-                apiURL = apiURL + "KSEA/"
+                apiURL = apiURL + "KSEA?/"
                 break;
         }
     }
@@ -47,11 +47,15 @@ export default function ApiButton(props) {
     const modFormatter = (mod) => {
         return (mod === 'Greater Than')
             ? "gt"
-            : (mod === 'Less Than')
-                ? "lt"
-                : (mod === 'Equal To')
-                    ? "et"
-                    : ""
+            : (mod === 'Greater Than Equal To')
+                ? "gte"
+                : (mod === 'Less Than Equal To')
+                        ? "lte"
+                        : (mod === 'Less Than')
+                            ? "lt"
+                            : (mod === 'Equal To')
+                                ? "et"
+                                : ""
     }
 
     const getTransformedState = () => {
@@ -81,7 +85,7 @@ export default function ApiButton(props) {
     }
 
     const transformedStateToQuery = (arr) => {
-        return "?" + arr.map(x => {
+        return arr.map(x => {
             return x.name + "_temp" + ((x.mod === '') ? "" : "[" + x.mod + "]") + "=" + x.temp;
         }).join("&")
     }
@@ -89,13 +93,7 @@ export default function ApiButton(props) {
 
     const fetchWeather = async () => {
 
-        let stateTemp = props.answers.state
-        let temp = props.answers.actual.max.value
-        if (temp){
-            apiURL = apiURL + "actual_max_temp=" + temp
-        }
-
-
+        apiURL = apiURL + transformedStateToQuery(getTransformedState(props.answers))
 
         setWeather(
             await fetch(apiURL)
@@ -118,13 +116,15 @@ export default function ApiButton(props) {
     } else{
 
     return (
-        //<Button onClick={()=>{fetchWeather()}}> {Weather} </Button>
-       // <Button onClick={()=> {console.log(queryString)}}/>
+     //   <Button onClick={()=>{fetchWeather()}}> {Weather}</Button>
+
         <Button onClick={()=>{
             stateFormatter(props.answers.state)
+            fetchWeather()
             console.log(props.answers)
-            console.log(apiURL + transformedStateToQuery(getTransformedState(props.answers)))
-        }}/>
+       //     console.log(apiURL + transformedStateToQuery(getTransformedState(props.answers)))
+        }}> {Weather} </Button>
+
     )
     }
 }
