@@ -1,12 +1,14 @@
 import React, {useEffect} from 'react';
-import {Button} from "evergreen-ui";
+import {Button, majorScale, Pane} from "evergreen-ui";
+import Tabulator from 'tabulator-tables';
+import WeatherTable from "./weathertable";
 
 export default function ApiButton(props) {
     let apiURL = "http://localhost:3000/weather/"
     const [Weather, setWeather] = React.useState(null)
     //example http://localhost:3000/weather/KPHX/?actual_max_temp=101
 
-    let stateURL = props.answers.state
+
 
     function stateFormatter(stateURL) {
         switch(stateURL) {
@@ -38,7 +40,7 @@ export default function ApiButton(props) {
                 apiURL = apiURL +"KPHX/?"
                 break;
             case 'Seattle':
-                apiURL = apiURL + "KSEA?/"
+                apiURL = apiURL + "KSEA/?"
                 break;
         }
     }
@@ -98,8 +100,8 @@ export default function ApiButton(props) {
         setWeather(
             await fetch(apiURL)
                 .then(response => response.json())
-                .then(json => json.KPHX)
         )
+
     }
 
     useEffect(() => {
@@ -114,16 +116,18 @@ export default function ApiButton(props) {
             </div>
         )
     } else{
-
     return (
      //   <Button onClick={()=>{fetchWeather()}}> {Weather}</Button>
-
+        <Pane>
         <Button onClick={()=>{
             stateFormatter(props.answers.state)
             fetchWeather()
+
             console.log(props.answers)
+            console.log(Weather)
        //     console.log(apiURL + transformedStateToQuery(getTransformedState(props.answers)))
-        }}> {Weather} </Button>
+        }}></Button>
+        </Pane>
 
     )
     }
